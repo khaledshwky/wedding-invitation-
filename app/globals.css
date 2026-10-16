@@ -1,0 +1,127 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-serif: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-sans: var(--font-manrope), 'Manrope', system-ui, sans-serif;
+
+  --color-ivory: var(--ivory);
+  --color-parchment: var(--parchment);
+  --color-espresso: var(--espresso);
+  --color-gold: var(--gold);
+  --color-gold-deep: var(--gold-deep);
+  --color-olive: var(--olive);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: light;
+  --ivory: #f7f3eb;
+  --parchment: #eee6d9;
+  --espresso: #30251f;
+  --gold: #b89a65;
+  /* Darker gold for small text so it keeps sufficient contrast on ivory */
+  --gold-deep: #8a6f42;
+  --olive: #5f5e44;
+
+  --background: var(--ivory);
+  --foreground: var(--espresso);
+  --card: #fbf8f2;
+  --card-foreground: var(--espresso);
+  --popover: #fbf8f2;
+  --popover-foreground: var(--espresso);
+  --primary: var(--espresso);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--parchment);
+  --secondary-foreground: var(--espresso);
+  --muted: var(--parchment);
+  --muted-foreground: #6b5d52;
+  --accent: var(--gold);
+  --accent-foreground: var(--espresso);
+  --destructive: #9b3b2e;
+  --border: color-mix(in oklab, var(--gold) 35%, transparent);
+  --input: color-mix(in oklab, var(--gold) 55%, transparent);
+  --ring: var(--gold-deep);
+  --radius: 0.125rem;
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.19 0 0 0 0 0.15 0 0 0 0 0.12 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--grain);
+    opacity: 0.18;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--gold) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 1px solid var(--gold-deep);
+    outline-offset: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@utility paper {
+  background-image: var(--grain);
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+@utility envelope-liner {
+  background-color: #6a6849;
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(45deg, rgb(184 154 101 / 0.28) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(-45deg, rgb(184 154 101 / 0.28) 0 1px, transparent 1px 9px);
+}
